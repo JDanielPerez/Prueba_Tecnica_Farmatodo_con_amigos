@@ -34,7 +34,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-<!--
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-oauth2-client</artifactId>
@@ -43,7 +42,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
--->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
@@ -97,13 +95,11 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<!-- Versión manejada por Spring Boot BOM -->
 		</dependency>
-		<!-- Conector opcional de Cloud SQL para Postgres -->
 		<dependency>
 			<groupId>com.google.cloud.sql</groupId>
 			<artifactId>postgres-socket-factory</artifactId>
-			<version>1.25.1</version> <!-- use la versión vigente -->
+			<version>1.25.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springdoc</groupId>
