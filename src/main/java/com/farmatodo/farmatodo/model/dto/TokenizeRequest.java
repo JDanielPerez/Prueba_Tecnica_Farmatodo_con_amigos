@@ -3,10 +3,10 @@ package com.farmatodo.farmatodo.model.dto;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Builder
 public class TokenizeRequest {
 

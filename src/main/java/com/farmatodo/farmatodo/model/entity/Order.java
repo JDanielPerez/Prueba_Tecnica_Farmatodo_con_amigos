@@ -1,5 +1,7 @@
 package com.farmatodo.farmatodo.model.entity;
 
+import com.farmatodo.farmatodo.model.enums.OrderStatus;
+import com.farmatodo.farmatodo.model.enums.PaymentStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -34,7 +36,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "CUSTOMER_PAYMENT_METHOD_ID")
-    private Long customerPaymentMethodId;
+    private CustomerPaymentMethod customerPaymentMethodId;
 
     //Lo voy a dejar asi y en el momento que vaya a confirmar el pago lo vuelvo obligatorio al guardar
     @Column(name = "DELIVERY_ADDRESS", nullable = true, length = 100)
@@ -45,14 +47,14 @@ public class Order {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "PAYMENT_STATUS")
-    private String paymentStatus;
+    private PaymentStatus paymentStatus;
 
     @Column(name = "PAYMENT_DATE")
     private Date paymentDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "ORDER_STATUS", nullable = false, length = 20)
-    private String orderStatus;
+    private OrderStatus orderStatus;
 
 
 }

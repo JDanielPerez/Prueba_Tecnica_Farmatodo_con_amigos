@@ -29,10 +29,10 @@ public class CustomerService {
     private void validateCustomer(Customer customer){
 
         //adicional deberia tener otra condición que valide si el formato del correo electronico es valido?
-        if(customerRepository.existByMail(customer.getEmail())){
+        if(customerRepository.existsByEmail(customer.getEmail())){
             throw new IllegalArgumentException("Este correo electronico ya se encuentra registrado.");
         }
-        if(customerRepository.existByPhoneNumber(customer.getPhoneNumber())){
+        if(customerRepository.existsByPhoneNumber(customer.getPhoneNumber())){
             throw new IllegalArgumentException("Este número celular ya se encuentra registrado.");
         }
     }
