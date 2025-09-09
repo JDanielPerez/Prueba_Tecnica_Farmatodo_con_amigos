@@ -6,14 +6,14 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "ORDERS")
 @Builder
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Order {
@@ -42,7 +42,7 @@ public class Order {
     @Column(name = "DELIVERY_ADDRESS", nullable = true, length = 100)
     private String deliveryAddress;
 
-    @Column(name = "TOTAL_VALUE")
+    @Column(name = "TOTAL_VALUE", nullable = false)
     private BigDecimal totalValue;
 
     @Enumerated(EnumType.STRING)
@@ -50,11 +50,14 @@ public class Order {
     private PaymentStatus paymentStatus;
 
     @Column(name = "PAYMENT_DATE")
-    private Date paymentDate;
+    private LocalDateTime paymentDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "ORDER_STATUS", nullable = false, length = 20)
     private OrderStatus orderStatus;
+
+    @Column(name = "PAYMENT_ATTEMPS", nullable = false, columnDefinition = "int default 0")
+    private int paymentAttempts;
 
 
 }

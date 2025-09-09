@@ -37,7 +37,7 @@ public class ProductService {
         }
     }
 
-    public List<Product> search(BigDecimal minQuantity, String name, String reference) {
-        return productRepository.findAll(ProductSpecifications.hasFilters(minQuantity, name, reference));
+    public List<Product> search(String name, String reference) {
+        return productRepository.findAll(ProductSpecifications.hasFilters(name, reference));
     }
 }

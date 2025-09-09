@@ -28,11 +28,10 @@ public class ControllerProduct {
         return ResponseEntity.ok("Producto registrado con exito");
     }
 
-    //falta un tema con la cantidad minima para que no sea un parametro sino una constante en el proyecto
     @GetMapping("/search")
-    public ResponseEntity<List<Product>> searchProducts(@RequestParam BigDecimal minQuantity, @RequestParam(required = false) String name, @RequestParam(required = false) String reference) {
-        List<Product> results = productService.search(minQuantity, name, reference);
-        historyService.saveHistory(name, reference, minQuantity);
+    public ResponseEntity<List<Product>> searchProducts(@RequestParam(required = false) String name, @RequestParam(required = false) String reference) {
+        List<Product> results = productService.search(name, reference);
+        historyService.saveHistory(name, reference);
         return ResponseEntity.ok(results);
     }
 

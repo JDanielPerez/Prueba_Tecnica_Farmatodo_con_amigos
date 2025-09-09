@@ -6,8 +6,7 @@ import lombok.*;
 @Entity
 @Table(name = "CUSTOMER_PAYMENT_METHOD")
 @Builder
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class CustomerPaymentMethod {

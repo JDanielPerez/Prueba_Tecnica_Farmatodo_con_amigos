@@ -1,5 +1,6 @@
 package com.farmatodo.farmatodo.repositories;
 import com.farmatodo.farmatodo.models.entities.Product;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.domain.Specification;
 
 import jakarta.persistence.criteria.Predicate;
@@ -9,12 +10,15 @@ import java.util.List;
 
 public class ProductSpecifications {
 
-    public static Specification<Product> hasFilters(BigDecimal minQuantity, String name, String reference) {
+    @Value("${spring.variables.quantityStockConfiguration}")
+    private static BigDecimal minQuantityStock;
+
+    public static Specification<Product> hasFilters(String name, String reference) {
         return (root, query, cb) -> {
             List<Predicate> predicates = new ArrayList<>();
 
             // condición obligatoria
-            predicates.add(cb.greaterThan(root.get("quantity"), minQuantity));
+            predicates.add(cb.greaterThan(root.get("quantity"), minQuantityStock));
 
             // opcionales
             if (name != null && !name.isBlank()) {

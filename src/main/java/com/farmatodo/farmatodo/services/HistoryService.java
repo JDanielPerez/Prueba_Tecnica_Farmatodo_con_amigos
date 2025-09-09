@@ -19,12 +19,11 @@ public class HistoryService {
     private HistoryRepository historyRepository;
 
     @Async
-    public void saveHistory(String name, String reference, BigDecimal quantity){
+    public void saveHistory(String name, String reference){
 
         History history = History.builder()
                 .name(name)
                 .reference(reference)
-                .quantity(quantity)
                 .date(LocalDateTime.now())
                 .build();
 

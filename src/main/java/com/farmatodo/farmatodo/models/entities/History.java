@@ -28,9 +28,6 @@ public class History {
     @Column(name = "REFERENCE", nullable = true)
     private String reference;
 
-    @Column(name = "QUANTITY", nullable = false)
-    private BigDecimal quantity;
-
     @Column(name = "DATE", nullable = false)
     private LocalDateTime date;
 }

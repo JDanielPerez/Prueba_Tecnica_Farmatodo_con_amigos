@@ -9,14 +9,11 @@ import java.util.List;
 @Entity
 @Table(name = "CUSTOMERS")
 @Builder
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Customer {
 
-    //CLAVE PRIMARIA COMPUESTA CONSULTARLA PARA MAÑANA MIERCOLES
-    //FALTA LA COLECCION DONDE SE ALMACENAN LOS MEDIOS DE PAGO
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
