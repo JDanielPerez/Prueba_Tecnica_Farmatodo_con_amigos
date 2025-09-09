@@ -32,12 +32,18 @@ public class ProductService {
 
     //que pasa si en lugar de un insertar es un actualizar
     private void validateProduct(Product product) {
-        if(productRepository.existsByReference(product.getReference())){
+        if(productRepository.existsByReference(product.getReference()) && product.getId() == null){
             throw new IllegalArgumentException("Ya existe un producto con la referencia: "+ product.getReference());
         }
     }
 
     public List<Product> search(String name, String reference) {
         return productRepository.findAll(ProductSpecifications.hasFilters(name, reference));
+    }
+
+    public void updateQuantity(Product product, BigDecimal quantity){
+
+        product.setQuantity(product.getQuantity().subtract(quantity));
+        productRepository.save(product);
     }
 }

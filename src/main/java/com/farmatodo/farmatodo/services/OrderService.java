@@ -30,6 +30,8 @@ public class OrderService {
     @Autowired
     private ProductRepository productRepository;
     @Autowired
+    private ProductService productService;
+    @Autowired
     private CustomerService customerService;
     @Autowired
     private SendMailService sendMailService;
@@ -55,7 +57,7 @@ public class OrderService {
             order.setOrderStatus(OrderStatus.CANCELLED);
             order.setPaymentStatus(PaymentStatus.REFUNED);
             orderRepository.save(order);
-            sendMailService.sendEmail("juancho.nac13@gmail.com","Rechazo en el pago","El numero de intentos para pagar ha sido superado");
+            sendMailService.sendEmail(customer.getEmail(),"Rechazo en el pago","El numero de intentos para pagar ha sido superado");
             throw new IllegalArgumentException("Se excedieron el maximo de intentos para pagar");
         }
 
@@ -77,7 +79,7 @@ public class OrderService {
         order.setPaymentAttempts(order.getPaymentAttempts()+1);
         order.setPaymentStatus(PaymentStatus.PAID);
         orderRepository.save(order);
-        sendMailService.sendEmail("juancho.nac13@gmail.com","Pago exitoso","Se proceso correctamente el pago");
+        sendMailService.sendEmail(customer.getEmail(),"Pago exitoso","Se proceso correctamente el pago");
         return order;
     }
 
@@ -121,6 +123,9 @@ public class OrderService {
 
             Product product = productRepository.findById(orderDetailDTO.getProductId()).get();
 
+            if(product.getQuantity().compareTo(orderDetailDTO.getQuantity()) == -1){
+                throw new IllegalArgumentException("La cantidad ingresada supera al stock actual");
+            }
             BigDecimal orderDetailTotal = (orderDetailDTO.getQuantity()).multiply(product.getPrice());
 
             OrderDetail orderDetail = OrderDetail.builder()
@@ -131,6 +136,7 @@ public class OrderService {
                     .build();
 
             orderDetailRepository.save(orderDetail);
+            productService.updateQuantity(product, orderDetailDTO.getQuantity());
     }
 
 }
